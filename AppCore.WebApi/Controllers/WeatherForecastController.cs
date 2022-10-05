@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppCore.Domain;
+using AppCore.Repo;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,25 @@ namespace AppCore.WebApi.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+
+        //Get api/values/5
+        //insert
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {   
+            /*quando passamos o nome, estamos fazendo o insert*/
+            var heroi = new Heroi { Nome = "Homem de Ferro" };
+            using (var contexto = new HeroiContext())
+            {   
+                //primeira forma de fazer um insert
+                contexto.Herois.Add(heroi);
+                //segunda forma de fazerum insert
+                //contexto.Add(heroi);
+                contexto.SaveChanges();
+            }
+            return Ok();
         }
     }
 }
