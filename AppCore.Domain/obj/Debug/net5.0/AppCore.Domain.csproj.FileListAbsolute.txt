@@ -1,0 +1,12 @@
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\bin\Debug\net5.0\AppCore.Domain.deps.json
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\bin\Debug\net5.0\AppCore.Domain.dll
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\bin\Debug\net5.0\AppCore.Domain.pdb
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.csproj.AssemblyReference.cache
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.AssemblyInfoInputs.cache
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.AssemblyInfo.cs
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.csproj.CoreCompileInputs.cache
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.dll
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\refint\AppCore.Domain.dll
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\AppCore.Domain.pdb
+C:\Projetos C#\AppCore.WebApi\AppCore.Domain\obj\Debug\net5.0\ref\AppCore.Domain.dll
