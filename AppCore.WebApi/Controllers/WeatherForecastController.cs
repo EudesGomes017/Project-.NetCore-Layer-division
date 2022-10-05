@@ -1,6 +1,7 @@
 ﻿using AppCore.Domain;
 using AppCore.Repo;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,52 +10,51 @@ using System.Threading.Tasks;
 
 namespace AppCore.WebApi.Controllers
 {
+
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class ValueController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        //readonly, nao precisamos usar o get e set
+        public readonly HeroiContext _context; 
+        public ValueController(HeroiContext context)
         {
-            _logger = logger;
+            _context = context;
         }
+        
+        //Get api/values
+          [HttpGet]
+          public ActionResult<IEnumerable<string>> Get()
+          {
+            //pegando o objeto heroi e chamando toList() que retorna um List<Heroi>
+            //var listHeroi = _context.Herois.ToList(); //parte de linq methodos
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+            /*fo Heroi contido no herois pega para o Heroi*/
+          var listHeroi = (from heroi in _context.Herois select heroi).ToList(); //utilizando LiNQ Query
+              return Ok(listHeroi);
+          }
 
 
         //Get api/values/5
         //insert
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
-        {   
+        [HttpGet("{nameHero}")]
+        public ActionResult Get(string nameHero)
+        {
             /*quando passamos o nome, estamos fazendo o insert*/
-            var heroi = new Heroi { Nome = "Homem de Ferro" };
-            using (var contexto = new HeroiContext())
-            {   
+            var heroi = new Heroi { Nome = nameHero };
+            
                 //primeira forma de fazer um insert
-                contexto.Herois.Add(heroi);
+                _context.Herois.Add(heroi);
                 //segunda forma de fazerum insert
                 //contexto.Add(heroi);
-                contexto.SaveChanges();
-            }
+                _context.SaveChanges();
+            
             return Ok();
         }
+
     }
+
+        
+    
 }

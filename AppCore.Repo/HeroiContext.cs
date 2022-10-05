@@ -7,11 +7,11 @@ namespace AppCore.Repo
     public class HeroiContext : DbContext
         
     {
-        //construtor vazio
+        /*construtor vazio
         public HeroiContext()
         {
 
-        }
+        }*/
 
         //implementando o construtor do heroi contexto
         public HeroiContext(DbContextOptions<HeroiContext> options) : base(options)
@@ -27,10 +27,10 @@ namespace AppCore.Repo
         public DbSet<HeroiBatalha> HeroisBatalhas { get; set; }
         public DbSet<IdentidadeSecreta> IdentidadeSecretas { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Password=123456;Persist Security Info=True;User ID=javasim;Initial Catalog=HeroApp;Data Source=EUDES_GOMES");
-        }
+        }*/
 
 
         //temos que especificar uma chave composta
