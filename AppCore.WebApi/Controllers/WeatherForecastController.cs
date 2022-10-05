@@ -17,51 +17,73 @@ namespace AppCore.WebApi.Controllers
     {
 
         //readonly, nao precisamos usar o get e set
-        public readonly HeroiContext _context; 
+        public readonly HeroiContext _context;
         public ValueController(HeroiContext context)
         {
             _context = context;
         }
-        
+
         //Get api/values
-          //[HttpGet] opção anterior
+        //[HttpGet] opção anterior
         //public ActionResult<IEnumerable<string>> Get()
 
         [HttpGet("filtro/{nome}")]
         public ActionResult GetFiltro(string nome)
-          {
+        {
             //pegando o objeto heroi e chamando toList() que retorna um List<Heroi>
             var listHeroi = _context.Herois
                 .Where(h => h.Nome.Contains(nome))
                 .ToList(); //parte de linq methodos
 
             /*fo Heroi contido no herois pega para o Heroi*/
-        /*  var listHeroi = (from heroi in _context.Herois 
-                           where heroi.Nome.Contains(nome)
-                           select heroi).ToList(); //utilizando LiNQ Query*/
-              return Ok(listHeroi);
-          }
+            /*  var listHeroi = (from heroi in _context.Herois 
+                               where heroi.Nome.Contains(nome)
+                               select heroi).ToList(); //utilizando LiNQ Query*/
+            return Ok(listHeroi);
+        }
 
 
         //Get api/values/5
         //insert
-        [HttpGet("{nameHero}")]
+        /* [HttpGet("{nameHero}")]
+         public ActionResult Get(string nameHero)
+         {
+             /*quando passamos o nome, estamos fazendo o insert
+             var heroi = new Heroi { Nome = nameHero };
+
+                 //primeira forma de fazer um insert
+                 _context.Herois.Add(heroi);
+                 //segunda forma de fazerum insert
+                 //contexto.Add(heroi);
+                 _context.SaveChanges();
+
+             return Ok();
+         }*/
+
+
+
+        //Get api/values/5
+        //Update
+        //utilizando as duas arbodagens de buscar e salvar
+        [HttpGet("Atualizar/{nameHero}")]
         public ActionResult Get(string nameHero)
         {
-            /*quando passamos o nome, estamos fazendo o insert*/
-            var heroi = new Heroi { Nome = nameHero };
-            
-                //primeira forma de fazer um insert
-                _context.Herois.Add(heroi);
-                //segunda forma de fazerum insert
-                //contexto.Add(heroi);
-                _context.SaveChanges();
-            
+
+            var heroi = _context.Herois
+                .Where(h => h.Id == 3) //quero atualizar um numero do nosso banco de dados
+                .FirstOrDefault(); // vai retorna o primeiro ou o padrão
+
+            heroi.Nome = "Homem Aranha";
+            _context.SaveChanges();
+
             return Ok();
+
+
+
+
         }
 
-    }
 
-        
-    
+
+    }
 }
