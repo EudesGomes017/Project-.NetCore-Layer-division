@@ -24,14 +24,21 @@ namespace AppCore.WebApi.Controllers
         }
         
         //Get api/values
-          [HttpGet]
-          public ActionResult<IEnumerable<string>> Get()
+          //[HttpGet] opção anterior
+        //public ActionResult<IEnumerable<string>> Get()
+
+        [HttpGet("filtro/{nome}")]
+        public ActionResult GetFiltro(string nome)
           {
             //pegando o objeto heroi e chamando toList() que retorna um List<Heroi>
-            //var listHeroi = _context.Herois.ToList(); //parte de linq methodos
+            var listHeroi = _context.Herois
+                .Where(h => h.Nome.Contains(nome))
+                .ToList(); //parte de linq methodos
 
             /*fo Heroi contido no herois pega para o Heroi*/
-          var listHeroi = (from heroi in _context.Herois select heroi).ToList(); //utilizando LiNQ Query
+        /*  var listHeroi = (from heroi in _context.Herois 
+                           where heroi.Nome.Contains(nome)
+                           select heroi).ToList(); //utilizando LiNQ Query*/
               return Ok(listHeroi);
           }
 
