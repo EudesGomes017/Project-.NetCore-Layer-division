@@ -77,12 +77,41 @@ namespace AppCore.WebApi.Controllers
             _context.SaveChanges();
 
             return Ok();
-
-
-
-
         }
 
+
+        
+        //utilizando as duas arbodagens de buscar e salvar
+        [HttpGet("addRange")]
+        public ActionResult GetAddRange()
+        {
+
+            //vamos adicioanar varios herois via Range de um tipo que ele já conhece
+            _context.AddRange(
+                new Heroi { Nome = "Capitão América" },
+                new Heroi { Nome = "Doutor Estranho" },
+                new Heroi { Nome = "Pantera Negra" },
+                new Heroi { Nome = "Hulk" },
+                new Heroi { Nome = "Gavião Arquero" }
+                );
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+
+        //Delete
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            /*o heroi possui quem eu estou procurando*/
+            var heroi = _context.Herois
+                                .Where(x => x.Id == id)
+                                .Single();
+
+            _context.Herois.Remove(heroi);// nesse momento estamos salvando no nosso contexto
+            _context.SaveChanges(); 
+        }
 
 
     }
